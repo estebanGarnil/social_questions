@@ -1,0 +1,1 @@
+"""Collaborative question lists application."""

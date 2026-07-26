@@ -1,0 +1,23 @@
+[project]
+name = "collab-questions-api"
+version = "0.1.0"
+description = "API Django REST pour des listes de questions collaboratives"
+requires-python = ">=3.10"
+dependencies = [
+    "Django>=5.2,<5.3",
+    "djangorestframework>=3.16,<3.17",
+    "djangorestframework-simplejwt>=5.5,<6",
+    "django-cors-headers>=4.7,<5",
+    "drf-spectacular>=0.28,<0.29",
+    "Pillow>=11,<13",
+    "PyMySQL>=1.1,<2",
+    "gunicorn>=23,<24",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

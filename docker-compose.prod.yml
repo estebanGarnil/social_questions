@@ -1,0 +1,60 @@
+name: collab-questions-prod
+
+services:
+  db:
+    image: mysql:8.4
+    env_file: ${ENV_FILE:-.env.prod}
+    volumes:
+      - mysql_prod_data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 --protocol=TCP -u $${MYSQL_USER} -p$${MYSQL_PASSWORD}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+      target: production
+    env_file: ${ENV_FILE:-.env.prod}
+    environment:
+      COLLECT_STATIC: "true"
+    volumes:
+      - static_prod_data:/app/staticfiles
+      - media_prod_data:/app/media
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health/')"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - static_prod_data:/var/www/static:ro
+      - media_prod_data:/var/www/media:ro
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  mysql_prod_data:
+  static_prod_data:
+  media_prod_data:

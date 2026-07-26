@@ -1,0 +1,173 @@
+# =============================================================================
+# Secrets and environment configuration
+# =============================================================================
+.env
+.env.*
+!.env.example
+!.env.*.example
+.envrc
+.direnv/
+
+# Local credentials, certificates and private keys
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+secrets.json
+
+# =============================================================================
+# Python
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Packaging / build outputs
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+venv.bak/
+env.bak/
+
+# Python tools and caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.pyright/
+.hypothesis/
+.tox/
+.nox/
+.dmypy.json
+dmypy.json
+
+# Coverage and test reports
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+pytest-report.xml
+junit.xml
+
+# =============================================================================
+# Django
+# =============================================================================
+# Local SQLite databases (the project uses MySQL in Docker, but SQLite remains
+# available as a local fallback in settings.py)
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+*.sqlite3-journal
+
+# User-uploaded and collected static files
+media/
+staticfiles/
+
+# Local-only Django settings and runtime files
+local_settings.py
+*.log
+logs/
+*.pid
+
+# Keep Django migrations versioned.
+# Do not add **/migrations/ here.
+
+# =============================================================================
+# Node.js / Vue / Vite / TypeScript
+# =============================================================================
+node_modules/
+frontend/dist/
+frontend/.vite/
+.vite/
+
+# TypeScript incremental build information
+*.tsbuildinfo
+
+# Frontend test and tooling caches
+frontend/coverage/
+.eslintcache
+.stylelintcache
+
+# Package-manager logs and caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.yarn/cache/
+.yarn/unplugged/
+.pnpm-store/
+
+# Keep lock files versioned for reproducible installs.
+# package-lock.json, yarn.lock and pnpm-lock.yaml are intentionally not ignored.
+
+# =============================================================================
+# Docker and local runtime overrides
+# =============================================================================
+docker-compose.override.yml
+docker-compose.*.override.yml
+compose.override.yml
+compose.*.override.yml
+
+# Local database dumps and backups
+backups/
+*.dump
+*.sql.gz
+*.sql.bz2
+*.sql.xz
+
+# =============================================================================
+# Temporary files
+# =============================================================================
+tmp/
+temp/
+.cache/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# =============================================================================
+# IDEs and editors
+# =============================================================================
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# =============================================================================
+# Operating systems
+# =============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =============================================================================
+# Optional local archives
+# =============================================================================
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
