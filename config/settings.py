@@ -25,6 +25,7 @@ def env_bool(name: str, default: bool = False) -> bool:
 
     raise ValueError(f"{name} must contain a valid boolean value.")
 
+
 SECRET_KEY = os.getenv(
     "DJANGO_SECRET_KEY",
     "unsafe-development-secret-key-change-this-before-production-2026",
