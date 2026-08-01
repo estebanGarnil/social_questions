@@ -18,5 +18,19 @@ ENTRYPOINT ["/app/docker/backend/entrypoint.sh"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 FROM base AS production
+
+RUN groupadd --gid 10001 app \
+    && useradd \
+        --uid 10001 \
+        --gid app \
+        --no-create-home \
+        --home-dir /app \
+        --shell /usr/sbin/nologin \
+        app \
+    && mkdir -p /app/staticfiles /app/media \
+    && chown -R app:app /app/staticfiles /app/media
+
+USER app
+
 ENTRYPOINT ["/app/docker/backend/entrypoint.sh"]
 CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "60"]

@@ -1,12 +1,41 @@
+# Git
 .git
 .gitignore
+
+# Python environments and caches
 .venv
+venv
+env
 __pycache__
-*.pyc
+*.py[cod]
+.pytest_cache
+.ruff_cache
+.mypy_cache
+
+# Local databases and runtime files
 db.sqlite3
+*.sqlite3
 media
 staticfiles
+*.log
+logs
+
+# Frontend dependencies and builds
 frontend/node_modules
 frontend/dist
+
+# Environment variables and secrets
 .env
-.env.prod
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+secrets.json
+
+# Database backups
+backups
+*.dump
+*.sql
+*.sql.gz

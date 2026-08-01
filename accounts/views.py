@@ -8,6 +8,7 @@ from drf_spectacular.utils import (
 from rest_framework import generics, permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.throttling import ScopedRateThrottle
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -34,6 +35,8 @@ User = get_user_model()
 class RegisterView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = RegisterSerializer
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = "register"
 
 
 @extend_schema_view(
@@ -85,12 +88,14 @@ class LogoutView(generics.GenericAPIView):
 
 @extend_schema(tags=["Authentification"], summary="Obtenir les tokens JWT")
 class TaggedTokenObtainPairView(TokenObtainPairView):
-    pass
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = "login"
 
 
 @extend_schema(tags=["Authentification"], summary="Rafraîchir les tokens JWT")
 class TaggedTokenRefreshView(TokenRefreshView):
-    pass
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = "token_refresh"
 
 
 @extend_schema_view(
