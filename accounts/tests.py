@@ -138,7 +138,7 @@ class AuthenticationThrottleTests(APITestCase):
             blocked_response.status_code,
             status.HTTP_429_TOO_MANY_REQUESTS,
         )
-        
+
 
 class UserFollowTests(APITestCase):
     @classmethod
