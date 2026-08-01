@@ -11,6 +11,7 @@ def env_list(name: str, default: str = "") -> list[str]:
     """Return a comma-separated environment variable as a clean list."""
     return [item.strip() for item in os.getenv(name, default).split(",") if item.strip()]
 
+
 def env_bool(name: str, default: bool = False) -> bool:
     """Read a boolean environment variable and reject invalid values."""
     value = os.getenv(name)
