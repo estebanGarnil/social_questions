@@ -1,0 +1,7 @@
+www.dancefloor.blog {
+    redir https://dancefloor.blog{uri} permanent
+}
+
+dancefloor.blog {
+    reverse_proxy nginx:80
+}
